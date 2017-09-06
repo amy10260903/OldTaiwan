@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Old Taiwan</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        background-color: #F0FFFF;
+      }
+      /* The Modal (background) */
+      #wrapper {
+        width: auto;   /*寬度設定為900px*/
+        margin: auto;   /*版面居中對齊*/
+        border: 2px solid #DEECDF;
+      }
+      #header {
+        background-color: #4B92B0;
+        padding-top: 20px;
+        padding-bottom: 30px;
+        padding-left: 20px;
+      }
+
+      /*******按鈕不同部分*******/
+      #button {
+        /*高度設定*/
+        height: 22px;
+
+        /*文字設定*/
+        font-weight: bolder;
+        color: #FFF;
+        font-size: 14px;
+
+        /*背景色設定*/
+        background-color:#6E6E6E;
+
+        /*將內定的邊距清除*/
+        margin: 0px;
+
+        /*將內定的內距清除*/
+        padding:0px;
+      }
+
+      #button li {
+        /* 讓各個清單元素靠左對齊 */
+        float:left;
+
+        /* 設定清單文字範圍的寬度 */
+        width:178px;
+
+        /* 去除清單文字前面的小點*/
+        list-style-type:none;
+
+        /* 設定背景色 */
+        background-color:#6E6E6E;
+
+        /* 讓清單文字居中對齊 */
+        text-align:center;
+
+        /* 設定字距為2px */
+        letter-spacing: 2px;
+
+        /* 設定左邊的白邊樣式 */
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: #FFF;
+
+        /* 設定右邊的白邊樣式 */
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: #FFF;
+      }
+
+      #button li a {
+        /* 連結範圍充滿整個區塊 */
+        display: block;
+
+        /* 單個連結範圍的框度和高度*/
+        width: 180px;
+        height:20px;
+
+        /* 連結範圍向上的內距 */
+        padding-top:2px;
+
+        /* 連結的文字設為白色以及無裝飾(無底線) */
+        color: #FFF;
+        text-decoration: none;
+      }
+
+      #button li a:hover{
+        /* 設定滑鼠移過時，清單改變的底色設定 */
+        background-color:#39919F
+      }
+      h1{
+        color: #FFF;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-size: 30px;
+        margin: 0px; /*清除原有的距離*/
+      }
+
+      .header-text {
+        font-size: 15px;
+        color: #D2EFF7;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: bolder;
+        font-style: italic;
+        margin: 0px;  /*清除原有的距離*/
+      }
+
+
+      .title-1 {
+        font-size: 18px;
+        line-height: 2em;
+        border-bottom-width: 1px;
+        border-left-width: 12px;
+        border-bottom-style: dotted;
+        border-left-style: dotted;
+        border-bottom-color: #417C9A;
+        border-left-color: #417C9A;
+        color: #187E95;
+      }
+      
+      #contents {
+        font-family: "微軟正黑體", "Arial Unicode MS";
+        font-size: 15px;
+        color: #333;
+        padding: 5px;
+        background-color: #DDE3E3;
+      }
+
+      .modal {
+        display: block; /* Hidden by default */
+        position: absolute; 
+        z-index: 1; /* Sit on top */
+        padding-top: 90px; /* Location of the box */
+        right: 0;
+        top: 10px;
+        width: 300px; 
+        height: 300px; 
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0); /* Black w/ opacity */
+      }
+
+      /* Modal Content (image) */
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 60%;
+        right:0;
+        max-width: 700px;
+        opacity: 1;
+      }
+
+      /* The Close Button */
+      .close {
+        position: absolute;
+        top: 0px;
+        right: 30px;
+        color: #f1f1f1;
+        font-size: 30px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper"> 
+      <div id="header">
+        <h1> <strong>Old Taiwan</strong></h1>
+        <span class="header-text">forever   Impressionism  </span>
+      </div>
+
+      <ul id="button">
+        <li><a href="index.html">About</a></li>
+        <li><a href="map.html">Map</a></li>
+      </ul>
+    <div id="contents">
+      <p id="demo"></p>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1fDpnHt2gAv0M-HfacqT8MhxrDKr1iwA&callback=initMap"></script>
+      <!-- you can use tables or divs for the overall layout -->
+      <table border="1">
+        <tr>
+          <td>
+            <div id="map_canvas" style="width: 800px; height: 700px"></div>
+          </td>
+          <td valign="top" style="width:150px;  color: #000000;">
+            <div id="side_bar"></div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript">
+        // this variable will collect the html which will eventually be placed in the side_bar 
+        var side_bar_html = "";
+
+        // arrays to hold copies of the markers used by the side_bar 
+        var gmarkers = [];
+
+        // global "map" variable
+        var map = null;
+        var sv = new google.maps.StreetViewService();
+        var clickedMarker = null;
+        var panorama = null;
+
+        var contentString = '<div id="content" style="width:400px;height:400px;"></div><div id="myModal" class="modal"><span class="close" onclick="myFunction()">×</span><img class="modal-content" id="img01"></div>';
+
+        // Get the modal
+        var modal1 = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var modalImg = document.getElementById("img01");
+        //modal1.style.display = "block";
+        //modalImg.src = '1.jpg';
+
+        // Get the <span> element that closes the modal
+        //var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        //span.onclick = function() {
+        //modal.style.display = "none";
+        //}
+        function myFunction() {
+          myModal.style.display="none";
+        }
+
+        var infowindow = new google.maps.InfoWindow({
+          size: new google.maps.Size(150, 50),
+          content: contentString
+        });
+
+        // A function to create the marker and set up the event window function 
+        function createMarker(latlng, name, pic, heading) {
+          var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: name,
+            zIndex: Math.round(latlng.lat() * -100000) << 5
+          });
+          marker.mypic = pic;
+          marker.myheading = heading;
+          
+
+          google.maps.event.addListener(marker, "click", function() {
+            clickedMarker = marker;
+            sv.getPanoramaByLocation(marker.getPosition(), 50, processSVData);
+            // openInfoWindow(marker);
+          });
+          // save the info we need to use later for the side_bar
+          gmarkers.push(marker);
+          // add a line to the side_bar html
+          side_bar_html += '<p>'+name+'<\p>'+'<a href="javascript:myclick(' + (gmarkers.length - 1) + ')">'  +' <img src=' + pic.src + ' style="width:200px;height:150px;">  <\/a><br>';
+
+        }
+
+        // This function picks up the click and opens the corresponding info window
+        function myclick(i) {
+          google.maps.event.trigger(gmarkers[i], "click");
+        }
+
+        function processSVData(data, status) {
+          if (status == google.maps.StreetViewStatus.OK) {
+            var marker = clickedMarker;
+            //openInfoWindow(clickedMarker);
+            infowindow.open(map, clickedMarker);
+            img01.src = clickedMarker.mypic.src;
+            //img01.src ='2.jpg';
+            if (!!panorama && !!panorama.setPano) {
+
+              panorama.setPano(data.location.pano);
+              panorama.setPov({
+                heading: clickedMarker.myheading,
+                pitch: 0,
+                zoom: 1
+              });
+              panorama.setVisible(true);
+
+              google.maps.event.addListener(marker, 'click', function() {
+                myModal.style.display = "block";
+                var markerPanoID = data.location.pano;
+                // Set the Pano to use the passed panoID
+                panorama.setPano(markerPanoID);
+                panorama.setPov({
+                  heading: clickedMarker.myheading,
+                  pitch: 0,
+                  zoom: 1
+                });
+                panorama.setVisible(true);
+              });
+            }
+          } else {
+            infowindow.open(map, clickedMarker);
+            //openInfoWindow(clickedMarker);
+            //title.innerHTML = clickedMarker.getTitle() + "<br>Street View data not found for this location";
+            // htmlContent.innerHTML = clickedMarker.myHtml;
+            img01.src = clickedMarker.mypic.src;
+            panorama.setVisible(false);
+            // alert("Street View data not found for this location.");
+          }
+        }
+
+        function initMap() {
+
+          // Create the map 
+          // No need to specify zoom and center as we fit the map further down.
+          map = new google.maps.Map(document.getElementById("map_canvas"), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false
+          });
+
+
+          google.maps.event.addListener(map, 'click', function() {
+            infowindow.close();
+          });
+          // Read the data from example.xml
+          // downloadUrl("example.xml", function(doc) {
+          var xmlDoc = xmlParse(xmlData);
+          var markers = xmlDoc.documentElement.getElementsByTagName("marker");
+          var bounds = new google.maps.LatLngBounds();
+          for (var i = 0; i < markers.length; i++) {
+            // obtain the attribues of each marker
+            var lat = parseFloat(markers[i].getAttribute("lat"));
+            var lng = parseFloat(markers[i].getAttribute("lng"));
+            var point = new google.maps.LatLng(lat, lng);
+            var label = markers[i].getAttribute("label");
+            var pic = new Image();
+            pic.src = markers[i].getAttribute("pic");
+            var heading = parseFloat(markers[i].getAttribute("heading"));
+
+            //document.getElementById("demo").innerHTML = pic.src;
+            // create the marker
+            var marker = createMarker(point, label, pic, heading);
+            bounds.extend(point);
+
+          }
+          var markerCluster = new MarkerClusterer(map, gmarkers,
+                                                  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        
+          
+          // put the assembled side_bar_html contents into the side_bar div
+          document.getElementById("side_bar").innerHTML = side_bar_html;
+          // Zoom and center the map to fit the markers
+          map.fitBounds(bounds);
+          // });
+        }
+
+        google.maps.event.addListener(infowindow, 'domready', function() {
+          panorama = new google.maps.StreetViewPanorama(document.getElementById("content"), {
+            navigationControl: true,
+            navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID},
+            enableCloseButton: false,
+            addressControl: false,
+            linksControl: true
+          });
+          // set the position of the infoWindow (the div points to the marker)
+          infowindow.setPosition(clickedMarker.getPosition());
+          // set the position of the panoramic view to the right coordinates
+          panorama.setPosition(clickedMarker.getPosition());
+          panorama.setPov({
+            heading: clickedMarker.myheading,
+            pitch: 0,
+            zoom: 1
+          });
+          panorama.setVisible(true);
+          myModal.style.display = "block";
+        });
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+
+        var xmlData = '<markers> <marker lat="25.0366885" lng="121.5079118" label="小南門" pic="1.jpg" heading="0"/> <marker lat="25.0397755" lng="121.514203"  label="總統府" pic="3.jpg" heading="263" /> </markers> ';
+
+        function xmlParse(str) {
+          if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined') {
+            var doc = new ActiveXObject('Microsoft.XMLDOM');
+            doc.loadXML(str);
+            return doc;
+          }
+
+          if (typeof DOMParser != 'undefined') {
+            return (new DOMParser()).parseFromString(str, 'text/xml');
+          }
+
+          return createElement('div', null);
+        }
+      </script>
+      <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+      </script>
+      </div>
+    </div>
+  </body>
+
+</html>
